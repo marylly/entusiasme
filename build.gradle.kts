@@ -1,11 +1,9 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 val ktorVersion: String by extra { "1.2.4" }
 val kotlinVersion: String by extra { "1.3.50" }
 
 buildscript {
-	val kotlinVersion: String by extra { "1.3.50" }
-	
+    val kotlinVersion: String by extra { "1.3.50" }
+
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     }
@@ -13,10 +11,8 @@ buildscript {
 
 plugins {
     id("org.jetbrains.kotlin.jvm").version("1.3.21")
-
     application
-	
-	jacoco
+    jacoco
 }
 
 group = "entusiasme"
@@ -24,21 +20,21 @@ version = "1.0.0-SNAPSHOT"
 
 repositories {
     jcenter()
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation("org.slf4j:slf4j-api:1.7.2")
-	implementation("org.slf4j:slf4j-simple:1.7.2")
+    implementation("org.slf4j:slf4j-api:1.7.2")
+    implementation("org.slf4j:slf4j-simple:1.7.2")
 
-	implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")		
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
-	
-	implementation("io.ktor:ktor-server-core:$ktorVersion")
+
+    implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
-	testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
+    testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
 }
 
 application {
@@ -71,19 +67,19 @@ val ktlintFormat by tasks.creating(JavaExec::class) {
 
 val detekt by configurations.creating
 
-dependencies {	
-	detekt("io.gitlab.arturbosch.detekt:detekt-formatting:1.0.0-RC15")
+dependencies {
+    detekt("io.gitlab.arturbosch.detekt:detekt-formatting:1.0.0-RC15")
     detekt("io.gitlab.arturbosch.detekt:detekt-cli:1.0.0-RC15")
 }
 
 val detektTask by tasks.creating(JavaExec::class) {
     group = LifecycleBasePlugin.VERIFICATION_GROUP
     description = "Runs a failfast detekt build."
-	main = "io.gitlab.arturbosch.detekt.cli.Main"
+    main = "io.gitlab.arturbosch.detekt.cli.Main"
     classpath = detekt
-   
+
     val baseline = "$rootDir/resources/detekt/baseline.xml"
-	val config = "$rootDir/resources/detekt/detekt.yml"
+    val config = "$rootDir/resources/detekt/detekt.yml"
     val input = files("src/main/kotlin", "src/test/kotlin")
 }
 
@@ -96,6 +92,8 @@ jacoco {
 }
 
 tasks.register<JacocoReport>("applicationCodeCoverageReport") {
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
+    description = "Runs Jacoco Coverage Report."
     executionData(tasks.run.get())
     sourceSets(sourceSets.main.get())
 }
