@@ -35,7 +35,6 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 	testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
 }
 
