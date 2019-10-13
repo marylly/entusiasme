@@ -29,12 +29,13 @@ dependencies {
 	implementation("org.slf4j:slf4j-api:1.7.2")
 	implementation("org.slf4j:slf4j-simple:1.7.2")
 
-	implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+	implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")		
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
+	
 	implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
 	testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
 }
 
