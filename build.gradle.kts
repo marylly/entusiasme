@@ -15,6 +15,8 @@ plugins {
     id("org.jetbrains.kotlin.jvm").version("1.3.21")
 
     application
+	
+	jacoco
 }
 
 group = "entusiasme"
@@ -87,3 +89,13 @@ val detektTask by tasks.creating(JavaExec::class) {
 
 tasks.named("check").get().dependsOn(detektTask)
 
+jacoco {
+    toolVersion = "0.8.4"
+    reportsDir = file("$buildDir/reports/jacoco")
+    applyTo(tasks.run.get())
+}
+
+tasks.register<JacocoReport>("applicationCodeCoverageReport") {
+    executionData(tasks.run.get())
+    sourceSets(sourceSets.main.get())
+}
