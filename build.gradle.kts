@@ -36,7 +36,8 @@ repositories {
 }
 
 dependencies {
-    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.8.1")
+	implementation("org.slf4j:slf4j-api:1.7.2")
+	implementation("org.slf4j:slf4j-simple:1.7.2")
 	
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("io.ktor:ktor-server-core:$ktorVersion")

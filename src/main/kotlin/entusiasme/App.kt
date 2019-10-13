@@ -8,13 +8,9 @@ import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
-class App {
-    companion object {
-        private val logger = LogManager.getLogger()
-    }
-}
+val logger = LoggerFactory.getLogger("Testing")
 
 fun Application.module() {
     routing {
@@ -25,5 +21,6 @@ fun Application.module() {
 }
 
 fun main(args: Array<String>) {
+    logger.info("Starting Netty server on port 8080")
     embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
 }
