@@ -49,7 +49,7 @@ dependencies {
     ktlint("com.pinterest:ktlint:0.34.2")
 }
 
-var ktlintTask = tasks.register<JavaExec>("ktlint") {
+val ktlintTask by tasks.creating(JavaExec::class) {
     group = LifecycleBasePlugin.VERIFICATION_GROUP
     description = "Check Kotlin code style"
     classpath = ktlint
@@ -57,7 +57,9 @@ var ktlintTask = tasks.register<JavaExec>("ktlint") {
     args("src/**/*.kt")
 }
 
-tasks.register<JavaExec>("ktlintFormat") {
+tasks.named("check").get().dependsOn(ktlintTask)
+
+val ktlintFormat by tasks.creating(JavaExec::class) {
     group = LifecycleBasePlugin.VERIFICATION_GROUP
     description = "Fix Kotlin code style deviations"
     classpath = ktlint
