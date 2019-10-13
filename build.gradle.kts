@@ -67,4 +67,23 @@ val ktlintFormat by tasks.creating(JavaExec::class) {
     args("-F", "src/**/*.kt")
 }
 
-tasks.named("check").get().dependsOn(ktlintTask)
+val detekt by configurations.creating
+
+dependencies {	
+	detekt("io.gitlab.arturbosch.detekt:detekt-formatting:1.0.0-RC15")
+    detekt("io.gitlab.arturbosch.detekt:detekt-cli:1.0.0-RC15")
+}
+
+val detektTask by tasks.creating(JavaExec::class) {
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
+    description = "Runs a failfast detekt build."
+	main = "io.gitlab.arturbosch.detekt.cli.Main"
+    classpath = detekt
+   
+    val baseline = "$rootDir/resources/detekt/baseline.xml"
+	val config = "$rootDir/resources/detekt/detekt.yml"
+    val input = files("src/main/kotlin", "src/test/kotlin")
+}
+
+tasks.named("check").get().dependsOn(detektTask)
+
