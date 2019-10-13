@@ -53,8 +53,7 @@ var ktlintTask = tasks.register<JavaExec>("ktlint") {
     description = "Check Kotlin code style"
     classpath = ktlint
     main = "com.pinterest.ktlint.Main"
-    args("src/main/**/*.kt", "src/test/**/*.kt", "src/endtoend-test/**/*.kt",
-        "src/integration-test/**/*.kt")
+    args("src/**/*.kt")
 }
 
 tasks.register<JavaExec>("ktlintFormat") {
@@ -62,8 +61,7 @@ tasks.register<JavaExec>("ktlintFormat") {
     description = "Fix Kotlin code style deviations"
     classpath = ktlint
     main = "com.pinterest.ktlint.Main"
-    args("-F", "src/main/**/*.kt", "src/test/**/*.kt", "src/endtoend-test/**/*.kt",
-        "src/integration-test/**/*.kt")
+    args("-F", "src/**/*.kt")
 }
 
 tasks.named("check").get().dependsOn(ktlintTask)
