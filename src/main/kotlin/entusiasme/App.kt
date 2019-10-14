@@ -10,6 +10,10 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import org.slf4j.LoggerFactory
 
+class App {
+    private val logger = LoggerFactory.getLogger(App::class.java.name)
+}
+
 val logger = LoggerFactory.getLogger("Testing")
 
 fun Application.module() {
