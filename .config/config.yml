@@ -12,16 +12,12 @@ jobs:
 
     steps:
       - checkout
-
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "build.gradle.kts" }}
-
+      
       - run: ./gradlew build
-
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle.kts" }}
-
       - run: ./gradlew check
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build
