@@ -15,7 +15,7 @@ jobs:
       
       - run: ./gradlew build
       - store_artifacts:
-          path: ~/repo/builds/libs/entusiasme-1.0.2-SNAPSHOT.jar
+          path: ~/repo/build/libs/entusiasme-1.0.2-SNAPSHOT.jar
           destination: package
 
   coverage:
