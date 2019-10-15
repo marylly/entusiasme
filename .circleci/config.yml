@@ -17,7 +17,24 @@ jobs:
       - store_artifacts:
           path: ~/repo/builds/libs/entusiasme-1.0.2-SNAPSHOT.jar
           destination: package
-          
+
+  coverage:
+    docker:
+      - image: circleci/openjdk:8-jdk
+
+    working_directory: ~/repo
+
+    environment:
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+
+    steps:
+      - checkout
+      - run: ./gradlew test jacocoTestReport
+      - store_artifacts:
+          path: ~/repo/build/reports/jacoco/test/html/
+          destination: coverage
+
   tests:
     docker:
       - image: circleci/openjdk:8-jdk
@@ -32,7 +49,7 @@ jobs:
       - checkout
       - run: ./gradlew check
       - store_artifacts:
-          path: ~/repo/build/reports
+          path: ~/repo/build/reports/tests/test
           destination: coverage
 
 workflows:
@@ -40,4 +57,5 @@ workflows:
   workflow:
     jobs:
     - build
+    - coverage
     - tests
