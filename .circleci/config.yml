@@ -14,10 +14,11 @@ jobs:
       - checkout
       
       - run: ./gradlew build
-      - run: ./gradlew check
       - store_artifacts:
           path: ~/repo/target/cemailService-0.0.1-SNAPSHOT.jar
           destination: package
+      - run: ./gradlew check
+      - store_artifacts:
           path: ~/repo/target/site/jacoco
           destination: test-results/coverage
 
