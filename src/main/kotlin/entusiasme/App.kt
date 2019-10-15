@@ -14,7 +14,7 @@ class App {
     private val logger = LoggerFactory.getLogger(App::class.java.name)
 }
 
-val logger = LoggerFactory.getLogger("Testing")
+val logger = LoggerFactory.getLogger("Application Main Logging")
 
 fun Application.module() {
     routing {
