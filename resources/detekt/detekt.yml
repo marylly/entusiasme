@@ -3,17 +3,37 @@ autoCorrect: true
 build:
   warningThreshold: 1
   failThreshold: 1
+  weights:
+    comments: 0.5
+    complexity: 2
+    empty-blocks: 0.5
+    exceptions: 1
+    naming: 0.5
+    potential-bugs: 2
+    style: 1
+    formatting: 0.5
+    code-smell: 2
 
 potential-bugs:
   active: true
+  DuplicateCaseInWhenExpression:
+    active: true
+  EqualsWithHashCodeExist:
+    active: true
+  ExplicitGarbageCollectionCall:
+    active: true
   NoElseInWhenExpression:
-    active: false
+    active: true
   UnsafeCast:
-    active: false
+    active: true
   UnsafeCallOnNullableType:
-    active: false
+    active: true
   LateinitUsage:
-      active: false
+    active: true
+  InvalidRange:
+    active: true
+  IteratorHasNextCallsNextMethod:
+    active: true
 
 exceptions:
   active: true
@@ -23,6 +43,13 @@ empty:
 
 empty-blocks:
   active: false
+
+naming:
+  active: true
+  FunctionMinLength:
+    minimumFunctionNameLength: 3
+  VariableMinLength:
+    minimumVariableNameLength: 3
 
 complexity:
   active: true
@@ -40,6 +67,14 @@ complexity:
     active: false
   LabeledExpression:
     active: false
+  ComplexCondition:
+    threshold: 2
+  ComplexInterface:
+    threshold: 15
+  NestedBlockDepth:
+    threshold: 3
+  StringLiteralDuplication:
+    threshold: 1
 
 code-smell:
   active: true
@@ -47,6 +82,12 @@ code-smell:
     threshold: 0.5
     weight: 0.45
     base: 0.5
+  LongMethod:
+    threshold: 20
+  LongParameterList:
+    threshold: 5
+  LargeClass:
+    threshold: 70
 
 formatting:
   active: true
@@ -91,8 +132,8 @@ formatting:
     active: true
     autoCorrect: true
   ExpressionBodySyntaxLineBreaks:
-      active: false
-      autoCorrect: false
+    active: false
+    autoCorrect: false
 
 performance:
   SpreadOperator:
@@ -104,10 +145,15 @@ style:
   WildcardImport:
     active: false
   NamingConventionViolation:
-    active: false
+    active: true
   MaxLineLength:
     active: false
     maxLineLength: 160
+  NoElseInWhenExpression:
+    active: true
+  MagicNumber:
+    active: true
+    ignoreNumbers: '-1,0,1,2'
 
 comments:
   active: true
